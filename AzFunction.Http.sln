@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzFunction.Http", "src\AzFunction.Http\AzFunction.Http.csproj", "{4DD1DC00-40D9-4952-9251-F784A6A1BDE0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{023FAF93-F379-48CF-A848-B5A8852292AC}"
+	ProjectSection(SolutionItems) = preProject
+		readme = readme
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{BFF5BE3D-8307-48F3-A73C-9F6FB11E2E24}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "charts", "charts", "{7E7FA8F8-582A-420A-85BC-5FEE3303523D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "az-func-http", "az-func-http", "{3F5A41C1-7CFF-4474-AD2C-652A9CD32A74}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\charts\az-func-http\.helmignore = deploy\charts\az-func-http\.helmignore
+		deploy\charts\az-func-http\Chart.yaml = deploy\charts\az-func-http\Chart.yaml
+		deploy\charts\az-func-http\values.yaml = deploy\charts\az-func-http\values.yaml
+	EndProjectSection
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "dockercompose\docker-compose.dcproj", "{2A8BB900-1D3B-4225-9DCD-95DD360F4231}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{3A5AA675-7727-4BA6-9BF9-46D203B6C569}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\charts\az-func-http\templates\deployment.yaml = deploy\charts\az-func-http\templates\deployment.yaml
+		deploy\charts\az-func-http\templates\scaled-object.yaml = deploy\charts\az-func-http\templates\scaled-object.yaml
+		deploy\charts\az-func-http\templates\_helpers.tpl = deploy\charts\az-func-http\templates\_helpers.tpl
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4DD1DC00-40D9-4952-9251-F784A6A1BDE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DD1DC00-40D9-4952-9251-F784A6A1BDE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DD1DC00-40D9-4952-9251-F784A6A1BDE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DD1DC00-40D9-4952-9251-F784A6A1BDE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A8BB900-1D3B-4225-9DCD-95DD360F4231}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A8BB900-1D3B-4225-9DCD-95DD360F4231}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A8BB900-1D3B-4225-9DCD-95DD360F4231}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A8BB900-1D3B-4225-9DCD-95DD360F4231}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BFF5BE3D-8307-48F3-A73C-9F6FB11E2E24} = {023FAF93-F379-48CF-A848-B5A8852292AC}
+		{7E7FA8F8-582A-420A-85BC-5FEE3303523D} = {BFF5BE3D-8307-48F3-A73C-9F6FB11E2E24}
+		{3F5A41C1-7CFF-4474-AD2C-652A9CD32A74} = {7E7FA8F8-582A-420A-85BC-5FEE3303523D}
+		{3A5AA675-7727-4BA6-9BF9-46D203B6C569} = {3F5A41C1-7CFF-4474-AD2C-652A9CD32A74}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A5D57A7F-4367-40DD-9035-1BD615D4F3D1}
+	EndGlobalSection
+EndGlobal

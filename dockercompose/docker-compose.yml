@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  azfunction.http:
+    image: ${DOCKER_REGISTRY-}azfunctionhttp
+    build:
+      context: .
+      dockerfile: ../src/AzFunction.Http/Dockerfile

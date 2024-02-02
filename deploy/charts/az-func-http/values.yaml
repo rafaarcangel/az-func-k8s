@@ -1,0 +1,28 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: localhost:5100/azfunctionhttp
+  pullPolicy: Always
+  tag: latest
+
+imagePullSecrets: []
+
+autoscaling:
+  enabled: false
+  minReplicas: 0
+  maxReplicas: 1
+  pollingInterval: 30
+  cooldownPeriod: 15
+
+# Values for Az Storage Share File
+volumeAzStorage:
+  prefixName: 
+  mountPath: 
+
+# Default values for Health check configuration.
+healthchecks:
+  servicesLabel: any
+  path: /

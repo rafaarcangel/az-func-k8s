@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "AzFunction.Http": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7044"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "httpPort": 32645,
+      "useSSL": false
+    }
+  }
+}
