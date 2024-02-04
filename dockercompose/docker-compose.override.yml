@@ -4,3 +4,7 @@ services:
   azfunction.http:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+
+  azfunction.servicebus:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development

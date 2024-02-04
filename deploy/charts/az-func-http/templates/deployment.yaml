@@ -7,9 +7,8 @@ metadata:
   annotations:
     timestamp: "{{ now | date "20060102150405" }}"
 spec:
-  {{- if not .Values.autoscaling.enabled }}
+
   replicas: {{ .Values.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include "az-func-http.selectorLabels" . | nindent 6 }}

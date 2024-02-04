@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "AzFunction.ServiceBus": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7040"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "httpPort": 31005,
+      "useSSL": false
+    }
+  }
+}

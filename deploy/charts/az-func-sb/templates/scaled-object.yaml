@@ -1,0 +1,38 @@
+{{- if .Values.autoscaling.enabled }}
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ include "az-func-sb.fullname" . }}-scaler
+spec:
+  scaleTargetRef:
+    name: {{ include "az-func-sb.fullname" . }}
+  minReplicaCount: {{ .Values.autoscaling.minReplicas}}
+  maxReplicaCount: {{ .Values.autoscaling.maxReplicas}}
+  pollingInterval: {{ .Values.autoscaling.pollingInterval}}
+  cooldownPeriod: {{ .Values.autoscaling.cooldownPeriod}}
+  triggers:
+  {{- range $key, $value := .Values.autoscaling.triggers }}
+    - type: {{ $key }}
+      metadata:
+        {{- if $value.connectionFromEnv }}
+        connectionFromEnv: {{ $value.connectionFromEnv }}
+        {{- end }}
+
+        # Required: queueName OR topicName and subscriptionName
+        {{- if  $value.queueName }}
+        queueName: {{ $value.queueName}}
+        {{- else if  $value.topicName }}
+        topicName: {{ $value.topicName}}
+        subscriptionName: {{ $value.subscriptionName}}
+        {{- end }}
+
+        {{- if $value.namespace }}
+        namespace: {{ $value.namespace }}
+        {{- end }}
+
+        activationMessageCount: {{ $value.activationMessageCount | quote }}
+        {{- if $value.messageCount }}
+        messageCount: {{ $value.messageCount | quote }}
+        {{- end }}
+  {{- end}}
+{{- end}}

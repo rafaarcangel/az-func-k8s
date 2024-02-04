@@ -1,0 +1,112 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "az-func-sb.fullname" . }}
+  labels:
+    {{- include "az-func-sb.labels" . | nindent 4 }}
+  annotations:
+    timestamp: "{{ now | date "20060102150405" }}"
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "az-func-sb.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "az-func-sb.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if .Values.volumeAzStorage.prefixName }}
+      volumes:
+        - name: {{ .Values.volumeAzStorage.prefixName }}-logs
+          persistentVolumeClaim:
+            claimName: {{ .Values.volumeAzStorage.prefixName }}-pvc
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- if .Values.volumeAzStorage.prefixName }}
+          volumeMounts: 
+            - name: {{ .Values.volumeAzStorage.prefixName }}-logs
+              mountPath: {{ include "az-func-sb.ensure-path" . }}
+          {{- end }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: K8sPodMetadataName
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          {{- range $key, $val := .Values.env }}
+          - name: {{ $key }}
+            value: {{ $val | quote }}
+          {{- end }}
+          {{- if .Values.resources}}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- end }}
+          ports:
+           - containerPort: 80
+          livenessProbe:
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 240
+            initialDelaySeconds: 10
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+          readinessProbe:
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 240
+            initialDelaySeconds: 10
+            httpGet:
+              path: /{{ .Values.healthchecks.path }}
+              port: 80
+              scheme: HTTP
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "az-func-sb.name" . }}-svc
+  labels:
+    {{- include "az-func-sb.healthcheck-servicesLabel" . | nindent 4 }}
+spec:
+  selector:
+    {{- include "az-func-sb.selectorLabels" . | nindent 6 }}
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: null
+      protocol: TCP

@@ -30,6 +30,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{
 		deploy\charts\az-func-http\templates\_helpers.tpl = deploy\charts\az-func-http\templates\_helpers.tpl
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzFunction.ServiceBus", "src\AzFunction.ServiceBus\AzFunction.ServiceBus.csproj", "{6D4D53BE-92C0-4E49-AC87-46CAC201E441}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{2A8BB900-1D3B-4225-9DCD-95DD360F4231}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A8BB900-1D3B-4225-9DCD-95DD360F4231}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A8BB900-1D3B-4225-9DCD-95DD360F4231}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D4D53BE-92C0-4E49-AC87-46CAC201E441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D4D53BE-92C0-4E49-AC87-46CAC201E441}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D4D53BE-92C0-4E49-AC87-46CAC201E441}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D4D53BE-92C0-4E49-AC87-46CAC201E441}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

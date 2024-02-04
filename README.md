@@ -30,7 +30,11 @@ The first thing you must do is to ensure you have a 'registry container' simulat
 
 To install the right image into the local repository, you can build the Dockerfile executing:
 
-```docker build . -f .\src\AzFunction.Http\Dockerfile -t localhost:5100/azfunctionhttp```
+```
+docker build . -f .\src\AzFunction.Http\Dockerfile -t localhost:5100/azfunctionhttp
+
+docker build . -f .\src\AzFunction.ServiceBus\Dockerfile -t localhost:5100/azfunctionsb
+```
 
 **NOTE**: If you create the image from VisualStudio is probably that it couldn't be placed in the registry, so you need to be sure that it is in the right place. If not, you can execute those lines to put it there:
 
@@ -49,6 +53,10 @@ Execute the next statement to install via HELM:
 
 ```
 helm upgrade --install az-func-http deploy/charts/az-func-http --namespace azfunctest --create-namespace
+```
+
+```
+helm upgrade --install az-func-sb deploy/charts/az-func-sb --namespace azfunctest --create-namespace --set env.ServiceBusOptions__QueueName=sb-queue-k8s-az-func,env.ServiceBusOptions__ConnectionString=Endpoint=sb://sb-k8s-az-func.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=UZZqT2SumRmKptrVrOENhnRklKKonXBZC+ASbEO0WMs=
 ```
 
 <br/>

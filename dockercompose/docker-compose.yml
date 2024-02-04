@@ -6,3 +6,9 @@ services:
     build:
       context: .
       dockerfile: ../src/AzFunction.Http/Dockerfile
+  
+  azfunction.sb:
+    image: ${DOCKER_REGISTRY-}azfunctionsb
+    build:
+      context: .
+      dockerfile: ../src/AzFunction.ServiceBus/Dockerfile
